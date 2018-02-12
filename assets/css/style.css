@@ -2,6 +2,7 @@
 body{
 	background-image: url(./../images/matrix-bg.jpg);
 	background-size: cover;
+	background-color: black;
 	font-family: 'Monofett', cursive;
 	color: greenyellow;
 	margin-left: 50px;
