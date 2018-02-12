@@ -12,6 +12,7 @@ h1{
 	text-align: right;
 	margin-right: 50px;
 }
+
 h2{
 	font-size: 40px;
 	margin-top: 35px;
@@ -27,6 +28,7 @@ button{
 	height: 50px;
 	border-color: gainsboro;
 	border-width: 7px;
+	margin-top: 15px;
 }
 
 
@@ -77,5 +79,13 @@ button{
 	width: 200px;
 	height: 200px;
 	margin: 5px;
-	background-color: darkolivegreen;
+	background-color: lightgrey;
+}
+
+#message1,
+#message2{
+	color: lightgoldenrodyellow;
+	font-size: 35px;
+	margin-top: 10px;
+	clear: both;
 }

@@ -1,70 +1,6 @@
-/******************************************************************/
-//   Object for player list and properties
-/******************************************************************/
-var players = [
-	{
-		name: "Neo"
-		, healthPoint: 120
-		, image: "assets/images/Neo.jpg"
-		, firepower: 8
-		, playerIndex: 0
-		, id1: "neo-player"
-		, id2: "neo-attacker"
-		, id3: "neo-defender"
-	}
-	, {
-		name: "Trinity"
-		, healthPoint: 120
-		, image: "assets/images/Trinity.jpg"
-		, firepower: 8
-		, playerIndex: 1
-		, id1: "trinity-player"
-		, id2: "trinity-attacker"
-		, id3: "trinity-defender"
-	}
-	, {
-		name: "Morpheus"
-		, healthPoint: 120
-		, image: "assets/images/Morpheus.jpg"
-		, firepower: 8
-		, playerIndex: 2
-		, id1: "morpheus-player"
-		, id2: "morpheus-attacker"
-		, id3: "morpheus-defender"
-	}
-	, {
-		name: "Cypher"
-		, healthPoint: 100
-		, image: "assets/images/Cypher.jpg"
-		, firepower: 8
-		, playerIndex: 3
-		, id1: "cypher-player"
-		, id2: "cypher-attacker"
-		, id3: "cypher-defender"
-	}
-	, {
-		name: "Agent Thompson"
-		, healthPoint: 150
-		, image: "assets/images/Agent_Thompson.jpg"
-		, firepower: 8
-		, playerIndex: 4
-		, id1: "thompson-player"
-		, id2: "thompson-attacker"
-		, id3: "thompson-defender"
-	}
-	, {
-		name: "Agent Smith"
-		, healthPoint: 180
-		, image: "assets/images/Agent_Smith.jpg"
-		, firepower: 8
-		, playerIndex: 5
-		, id1: "smith-player"
-		, id2: "smith-attacker"
-		, id3: "smith-defender"
-	}
-];
 
 //   Global Variables
+var players = [];
 var attacker = [];
 var enemies = [];
 var defender = [];
@@ -75,9 +11,11 @@ var winOrLoss = false;
 var win = false;
 var Loss = false;
 var goodOrEvil = true;
+var gameOver = false;
 
 // Initialize the game after initial page load
 $(document).ready(function () {
+	// Clear previously loaded messages 
 	initializeGame();
 });
 
@@ -85,6 +23,9 @@ $(document).ready(function () {
 
 $(document).on("click", "#neo-player", function () {
 	console.log("The chosen one!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -94,6 +35,9 @@ $(document).on("click", "#neo-player", function () {
 
 $(document).on("click", "#trinity-player", function () {
 	console.log("Follow the white rabbit!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -103,6 +47,9 @@ $(document).on("click", "#trinity-player", function () {
 
 $(document).on("click", "#morpheus-player", function () {
 	console.log("I offer you two choices!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -112,6 +59,9 @@ $(document).on("click", "#morpheus-player", function () {
 
 $(document).on("click", "#cypher-player", function () {
 	console.log("Who is in the sheep's skin?");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -121,6 +71,9 @@ $(document).on("click", "#cypher-player", function () {
 
 $(document).on("click", "#thompson-player", function () {
 	console.log("Agent Thompson!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -130,6 +83,9 @@ $(document).on("click", "#thompson-player", function () {
 
 $(document).on("click", "#smith-player", function () {
 	console.log("Mr. Anderson...");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!playerChosen) {
 		var index = $(this).attr("data-index");
 		attacker.push(players[index]);
@@ -139,6 +95,9 @@ $(document).on("click", "#smith-player", function () {
 
 $(document).on("click", "#neo-defender", function () {
 	console.log("The chosen one!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -146,17 +105,26 @@ $(document).on("click", "#neo-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
+		//Adjust player indexes after splicing
+		adjustEnemiesIndex();
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
+	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
 	}
 });
 
 $(document).on("click", "#trinity-defender", function () {
 	console.log("Follow the white rabbit!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -164,17 +132,26 @@ $(document).on("click", "#trinity-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
+		//Adjust player indexes after splicing
+		adjustEnemiesIndex();
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
+	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
 	}
 });
 
 $(document).on("click", "#morpheus-defender", function () {
 	console.log("I offer you two choices!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -182,17 +159,26 @@ $(document).on("click", "#morpheus-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
+		//Adjust player indexes after splicing
+		adjustEnemiesIndex();
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
+	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
 	}
 });
 
 $(document).on("click", "#cypher-defender", function () {
 	console.log("Who is in the sheep's skin?");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -200,17 +186,26 @@ $(document).on("click", "#cypher-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
+		//Adjust player indexes after splicing
+		adjustEnemiesIndex();
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
+	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
 	}
 });
 
 $(document).on("click", "#thompson-defender", function () {
 	console.log("Agent Thompson!");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -218,17 +213,26 @@ $(document).on("click", "#thompson-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
+		//Adjust player indexes after splicing
+		adjustEnemiesIndex();
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
 	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
+	}
 });
 
 $(document).on("click", "#smith-defender", function () {
 	console.log("Mr. Anderson...");
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
 	if (!defenderChosen) {
 		var index = $(this).attr("data-index");
 		defender.push(enemies[index]);
@@ -236,19 +240,105 @@ $(document).on("click", "#smith-defender", function () {
 		// Populate defender
 		populateDefender();
 		//Splice Enemies array
-		enemies.splice(index,1);
+		enemies.splice(index, 1);
 
 		//Repopulate defending army 
 		populateDefendingArmy();
 
 		defenderChosen = true;
 	}
+	else {
+		$("#message1").html("Defender already chosen.");
+		$("#message2").html("Click on Attach button, to continue the battle");
+	}
 });
 
 
-$(document).on("click", "#smith-defender", function () {
-	console.log("Mr. Anderson...");
+$(document).on("click", "#attack", function () {
+	// Clear previously loaded messages 
+	$("#message1").html("");
+	$("#message2").html("");
+	if (!gameOver) {
+		if (!playerChosen) {
+			$("#message1").html("Choose your character to fight the battle");
+		} else {
+			if (!defenderChosen) {
+				$("#message1").html("Choose a defender to fight the battle");
+			}
+		}
+		if (playerChosen && defenderChosen) {
+			console.log("Attack...!");
+			defender[0].healthPoint -= attacker[0].firepower;
+			attacker[0].healthPoint -= defender[0].firepower;
+			if (defender[0].healthPoint > 0 && attacker[0].healthPoint > 0) {
+				$("#message1").html("You attacked " + defender[0].name + " for " + attacker[0].firepower + " damage.");
+				$("#message2").html(defender[0].name + " attacked you back for " + defender[0].firepower + " damage.");
+				populateAttacker();
+				populateDefender();
+				if (goodOrEvil) {
+					attacker[0].firepower += 8;
+				} else {
+					defender[0].firepower += 8;
+				}
+			}
+			if (defender[0].healthPoint <= 0 && attacker[0].healthPoint <= 0) {
+				$("#message1").html("You have defeated " + defender[0].name + " !");
+				$("#message2").html("But Alas! You too are defeated. GAME OVER!!");
+				$("#attacker").empty();
+				// defender = [];
+				$("#defender").empty();
+				gameOver = true;
+			}
+			if (attacker[0].healthPoint <= 0 && defender[0].healthPoint > 0) {
+				$("#message1").html("You have been defeated !");
+				$("#message2").html("GAME OVER!!");
+				$("#attacker").empty();
+				populateDefender();
+				gameOver = true;
+
+			}
+			if (defender[0].healthPoint <= 0 && attacker[0].healthPoint > 0) {
+				if (enemies.length > 0) {
+					$("#message1").html("You have defeated " + defender[0].name + " !");
+					$("#message2").html("Choose another enemy to fight.");
+					populateAttacker();
+					defender = [];
+					$("#defender").empty();
+					defenderChosen = false;
+					// if (goodOrEvil) {
+					// 	attacker[0].firepower += 8;
+					// }
+				}
+				else {
+					$("#message1").html("You have defeated all the enemies!");
+					$("#message2").html("YOU WON. GAME OVER!!");
+					populateAttacker();
+					defender = [];
+					$("#defender").empty();
+					defenderChosen = false;
+					gameOver = true;
+				}
+			}
+			if (gameOver) {
+				var restartButton = $("<button>");
+				restartButton.attr('id', "restart-button");
+				restartButton.html("Restart");
+				$("#reset").append(restartButton);
+			}
+		}
+	}
+	else {
+		$("#message1").html("Game Completed.");
+		$("#message2").html("Click on Retart button and start the game again.");
+	}
 });
+
+$(document).on("click", "#restart-button", function () {
+	console.log("Restarting");
+	$("#reset").empty();
+	initializeGame();
+});
+
 
 /******************************************************************/
 //   Start of functions
@@ -258,6 +348,73 @@ function initializeGame() {
 	/******************************************************************/
 	//   Initialization/Reset code
 	/******************************************************************/
+	players = [];
+	/******************************************************************/
+	//   Object for player list and properties
+	/******************************************************************/
+	players = [
+		{
+			name: "Neo"
+			, healthPoint: 180
+			, image: "assets/images/Neo.jpg"
+			, firepower: 12
+			, playerIndex: 0
+			, id1: "neo-player"
+			, id2: "neo-attacker"
+			, id3: "neo-defender"
+		}
+		, {
+			name: "Trinity"
+			, healthPoint: 120
+			, image: "assets/images/Trinity.jpg"
+			, firepower: 10
+			, playerIndex: 1
+			, id1: "trinity-player"
+			, id2: "trinity-attacker"
+			, id3: "trinity-defender"
+		}
+		, {
+			name: "Morpheus"
+			, healthPoint: 150
+			, image: "assets/images/Morpheus.jpg"
+			, firepower: 11
+			, playerIndex: 2
+			, id1: "morpheus-player"
+			, id2: "morpheus-attacker"
+			, id3: "morpheus-defender"
+		}
+		, {
+			name: "Cypher"
+			, healthPoint: 100
+			, image: "assets/images/Cypher.jpg"
+			, firepower: 5
+			, playerIndex: 3
+			, id1: "cypher-player"
+			, id2: "cypher-attacker"
+			, id3: "cypher-defender"
+		}
+		, {
+			name: "Agent Thompson"
+			, healthPoint: 150
+			, image: "assets/images/Agent_Thompson.jpg"
+			, firepower: 20
+			, playerIndex: 4
+			, id1: "thompson-player"
+			, id2: "thompson-attacker"
+			, id3: "thompson-defender"
+		}
+		, {
+			name: "Agent Smith"
+			, healthPoint: 180
+			, image: "assets/images/Agent_Smith.jpg"
+			, firepower: 25
+			, playerIndex: 5
+			, id1: "smith-player"
+			, id2: "smith-attacker"
+			, id3: "smith-defender"
+		}
+	];
+
 	attacker = [];
 	enemies = [];
 	defender = [];
@@ -268,6 +425,7 @@ function initializeGame() {
 	win = false;
 	Loss = false;
 	goodOrEvil = true;
+	gameOver = false;
 
 
 	var instructionDiv = $("<div>");
@@ -289,7 +447,11 @@ function initializeGame() {
 		innerDivFunc($("#" + players[i].id1), "innerDiv", "", players[i].healthPoint);
 
 	}
-
+	$("#message1").html("");
+	$("#message2").html("");
+	$("#attacker").empty();
+	$("#defending-army").empty();
+	$("#defender").empty();
 }
 
 function innerDivFunc(parentDivParm, classNameParm, idParm, htmlParm) {
@@ -345,9 +507,7 @@ function machineArmyToEnemies() {
 		enemies.push(players[i]);
 	}
 	// Adjust enemies object array player index
-	for (var i = 0; i < enemies.length; i++) {
-		enemies[i].playerIndex = i;
-	}
+	adjustEnemiesIndex();
 }
 
 function neoArmyToEnemies() {
@@ -386,3 +546,9 @@ function populateDefender() {
 	innerDivFunc($("#" + defender[0].id2), "innerDiv", "", defender[0].healthPoint);
 }
 
+function adjustEnemiesIndex() {
+	// Adjust enemies object array player index
+	for (var i = 0; i < enemies.length; i++) {
+		enemies[i].playerIndex = i;
+	}
+}
