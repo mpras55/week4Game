@@ -1,0 +1,81 @@
+
+body{
+	background-image: url(./../images/matrix-bg.png);
+	background-size: cover;
+	font-family: 'Monofett', cursive;
+	color: greenyellow;
+	margin-left: 50px;
+}
+
+h1{
+	font-size: 80px;
+	text-align: right;
+	margin-right: 50px;
+}
+h2{
+	font-size: 40px;
+	margin-top: 35px;
+	margin-bottom: 15px;
+	clear: both;
+}
+
+button{
+	font-family: 'Monofett';
+	font-size: 30px;
+	background-color: chartreuse;
+	width: 150px;
+	height: 50px;
+	border-color: gainsboro;
+	border-width: 7px;
+}
+
+
+.players{
+	float: left;
+	border: 3px solid greenyellow;
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	background-color: #ffffff;
+}
+
+.players:hover{
+	background-color: #aaaaaa;
+}
+
+.innerDiv{
+	text-align: center;
+	color: black;
+	font-size: 25px;
+}
+
+.attacker{
+	float: left;
+	border: 3px solid greenyellow;
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	background-color: lightskyblue;
+}
+
+.defending-army{
+	float: left;
+	border: 3px solid greenyellow;
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	background-color: lightsalmon;
+}
+
+.defending-army:hover{
+	background-color: darkgoldenrod;
+}
+
+.defender2{
+	float: left;
+	border: 3px solid greenyellow;
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	background-color: darkolivegreen;
+}
